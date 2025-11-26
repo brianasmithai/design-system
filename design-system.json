@@ -1,0 +1,760 @@
+{
+  "meta": {
+    "name": "Workbench",
+    "version": "0.1.0",
+    "status": "draft",
+    "description": "A productivity-focused design language for internal tools, dashboards, and data-driven applications. Optimized for dense, scannable interfaces with calm visual presence and touch-friendly interactions."
+  },
+  "brand": {
+    "keywords": [
+      "calm",
+      "focused",
+      "efficient",
+      "dense",
+      "professional",
+      "utilitarian",
+      "accessible",
+      "quiet"
+    ],
+    "toneOfVoice": "Direct and helpful without being terse. Use plain language that respects the user's time. Avoid jargon unless domain-appropriate. Prefer active voice and concrete nouns. Error messages should explain what happened and what to do next—never blame the user.",
+    "visualPersonality": "Quiet confidence. The interface recedes so content can lead. Neutral backgrounds, restrained color usage, and deliberate whitespace create a sense of order. The single accent color appears sparingly to guide attention toward actions and status. Dense layouts feel organized rather than cluttered because of consistent alignment and measured breathing room.",
+    "exampleTagline": "All signal, no noise."
+  },
+  "principles": [
+    {
+      "id": "content-first",
+      "name": "Content First",
+      "description": "The interface exists to surface data and enable action. Every decorative or structural element must justify its presence by improving comprehension or usability.",
+      "guidelines": [
+        "Prioritize data density over visual embellishment.",
+        "Use color, weight, and spacing to create hierarchy—not decorative elements.",
+        "Remove any element that does not help the user understand or act."
+      ]
+    },
+    {
+      "id": "quiet-until-needed",
+      "name": "Quiet Until Needed",
+      "description": "The system communicates through subtlety by default and reserves strong signals for moments that require user attention. This prevents alert fatigue and keeps focus on the task.",
+      "guidelines": [
+        "Default states should be visually quiet—neutral colors, minimal borders.",
+        "Reserve the accent color for interactive elements and active states.",
+        "Use motion sparingly; when present, it should convey meaning, not decoration.",
+        "Progressive disclosure: show essential information first, reveal details on demand."
+      ]
+    },
+    {
+      "id": "predictable-structure",
+      "name": "Predictable Structure",
+      "description": "Users build spatial memory when layouts are consistent. Predictability reduces cognitive load and accelerates task completion.",
+      "guidelines": [
+        "Navigation, actions, and content should occupy consistent regions across views.",
+        "Sidebar, header, and main content areas maintain stable positions.",
+        "Patterns like 'summary cards above detail tables' should recur across similar contexts.",
+        "Avoid repositioning elements based on content length or device unless necessary for usability."
+      ]
+    },
+    {
+      "id": "accessible-by-default",
+      "name": "Accessible by Default",
+      "description": "Accessibility is not an afterthought or a compliance checkbox. The system is designed from the ground up to be usable by everyone, including keyboard-only users, screen reader users, and those with visual impairments.",
+      "guidelines": [
+        "All interactive elements must be reachable and operable via keyboard.",
+        "Color is never the sole means of conveying information.",
+        "Touch targets meet minimum sizing for comfortable tap interaction.",
+        "Focus states are always visible and distinct.",
+        "Text contrast meets or exceeds WCAG AA standards."
+      ]
+    },
+    {
+      "id": "designed-for-density",
+      "name": "Designed for Density",
+      "description": "Information-rich interfaces require careful density management. Compact layouts maximize screen utility, but breathing room at strategic points prevents cognitive overload.",
+      "guidelines": [
+        "Favor vertical stacking over horizontal sprawl when possible.",
+        "Group related elements tightly; separate unrelated groups with deliberate whitespace.",
+        "Use smaller text sizes for supporting information; reserve larger sizes for primary content.",
+        "Tables and lists should be scannable—align columns, use consistent row heights, and avoid excessive cell padding."
+      ]
+    },
+    {
+      "id": "one-accent-many-shades",
+      "name": "One Accent, Many Shades",
+      "description": "A single accent hue provides visual coherence and clear affordance. Variations in lightness and saturation extend its utility without introducing palette complexity.",
+      "guidelines": [
+        "Choose one accent hue per application or product area; do not mix accent hues.",
+        "Use lighter tints of the accent for backgrounds (e.g., selected rows, active nav items).",
+        "Use the full-saturation accent for primary actions and key status indicators.",
+        "Avoid using the accent color for large surface areas—it should punctuate, not dominate."
+      ]
+    }
+  ],
+  "foundations": {
+    "color": {
+      "philosophy": "Color serves function. The palette is predominantly neutral—grays, slates, and near-blacks in dark mode; whites and light grays in light mode. A single accent hue provides interactive affordance and status indication. Semantic colors (success, warning, destructive) are reserved strictly for conveying meaning and should not be used decoratively. Each application may define its own accent hue, but the usage patterns remain consistent.",
+      "modes": ["dark", "light"],
+      "defaultMode": "dark",
+      "roles": [
+        {
+          "name": "background",
+          "purpose": "The base layer of the interface—what lies behind everything else.",
+          "usage": [
+            "Page-level background.",
+            "Deepest layer in dark mode; lightest layer in light mode."
+          ],
+          "avoid": [
+            "Using for elevated surfaces like cards or modals.",
+            "Applying to interactive elements."
+          ]
+        },
+        {
+          "name": "surface",
+          "purpose": "Elevated containers that sit above the background—cards, panels, modals, popovers.",
+          "usage": [
+            "Card backgrounds.",
+            "Modal and dialog backgrounds.",
+            "Dropdown menus and popovers.",
+            "Sidebar background when visually distinct from main content."
+          ],
+          "avoid": [
+            "Using for inline content that does not represent a distinct container.",
+            "Excessive nesting of surface colors—prefer one level of elevation."
+          ]
+        },
+        {
+          "name": "muted",
+          "purpose": "Subdued backgrounds for secondary or grouped content areas, providing subtle visual separation without strong contrast.",
+          "usage": [
+            "Table header rows.",
+            "Alternating row backgrounds (zebra striping) if used.",
+            "Input field backgrounds in their default state.",
+            "Code block backgrounds."
+          ],
+          "avoid": [
+            "Using for primary interactive elements.",
+            "Overusing—muted areas lose meaning if everything is muted."
+          ]
+        },
+        {
+          "name": "border",
+          "purpose": "Subtle lines that define edges and separate regions without commanding attention.",
+          "usage": [
+            "Card and panel borders.",
+            "Table cell dividers.",
+            "Input field outlines in default state.",
+            "Divider lines between content sections."
+          ],
+          "avoid": [
+            "Heavy or high-contrast borders that create visual noise.",
+            "Using border color for text or icons."
+          ]
+        },
+        {
+          "name": "foreground",
+          "purpose": "Primary text and icon color—the default for readable content.",
+          "usage": [
+            "Body text.",
+            "Headings.",
+            "Primary icons.",
+            "Interactive element labels."
+          ],
+          "avoid": [
+            "Using for decorative elements.",
+            "Applying to backgrounds."
+          ]
+        },
+        {
+          "name": "foreground-muted",
+          "purpose": "Secondary text and icons that should recede in hierarchy.",
+          "usage": [
+            "Help text and descriptions.",
+            "Timestamps and metadata.",
+            "Placeholder text.",
+            "Inactive navigation labels.",
+            "Secondary icons."
+          ],
+          "avoid": [
+            "Using for primary content that users must read.",
+            "Important labels or active states."
+          ]
+        },
+        {
+          "name": "primary",
+          "purpose": "The single accent color used for interactive affordance and emphasis. Each application defines its own hue.",
+          "usage": [
+            "Primary action buttons.",
+            "Active navigation indicators.",
+            "Links.",
+            "Selected states (e.g., active tab, selected table row highlight).",
+            "Focus rings.",
+            "Progress indicators."
+          ],
+          "avoid": [
+            "Large surface areas.",
+            "Non-interactive decorative use.",
+            "Mixing multiple accent hues."
+          ]
+        },
+        {
+          "name": "primary-muted",
+          "purpose": "A tinted, lower-saturation version of the accent for subtle emphasis.",
+          "usage": [
+            "Hover backgrounds on interactive elements.",
+            "Selected row backgrounds in tables.",
+            "Active sidebar item backgrounds.",
+            "Badge backgrounds for neutral-positive status."
+          ],
+          "avoid": [
+            "Using as primary button background.",
+            "Replacing the full accent where strong affordance is needed."
+          ]
+        },
+        {
+          "name": "success",
+          "purpose": "Indicates successful completion, positive status, or healthy state.",
+          "usage": [
+            "Success messages and toasts.",
+            "Checkmarks and completion indicators.",
+            "Positive trend indicators.",
+            "Online/active status dots."
+          ],
+          "avoid": [
+            "Decorative use unrelated to success or positive meaning.",
+            "Using for primary actions unless the action is explicitly confirmatory."
+          ]
+        },
+        {
+          "name": "warning",
+          "purpose": "Indicates caution, potential issues, or states requiring attention but not immediate danger.",
+          "usage": [
+            "Warning banners and alerts.",
+            "Validation messages for recoverable issues.",
+            "Pending or at-risk status indicators."
+          ],
+          "avoid": [
+            "Overusing for minor notifications.",
+            "Combining with destructive color in the same context."
+          ]
+        },
+        {
+          "name": "destructive",
+          "purpose": "Indicates danger, errors, or irreversible actions requiring caution.",
+          "usage": [
+            "Error messages.",
+            "Delete and destructive action buttons.",
+            "Invalid input states.",
+            "Critical alerts.",
+            "Offline/error status indicators."
+          ],
+          "avoid": [
+            "Using for warnings that are not truly dangerous.",
+            "Applying to large areas—reserve for focused attention."
+          ]
+        }
+      ],
+      "accessibility": {
+        "contrastStandard": "WCAG 2.1 AA minimum; AAA preferred for body text",
+        "notes": "All foreground/background combinations must meet contrast requirements in both light and dark modes. Semantic colors (success, warning, destructive) must be distinguishable by more than hue alone—use icons, labels, or patterns. Test palettes with color vision deficiency simulators before finalizing."
+      }
+    },
+    "typography": {
+      "philosophy": "Typography creates hierarchy through size, weight, and spacing—not through variety. A single sans-serif family handles all interface text; a monospace family is reserved for code and data that benefits from fixed-width alignment. Type sizes stay compact to maximize density, with hierarchy achieved primarily through weight and color rather than dramatic size differences.",
+      "primaryFontCategory": "sans-serif",
+      "secondaryFontCategory": "monospace",
+      "scaleStrategy": "A compact but readable modular scale with small increments between steps. Body text is sized for comfortable extended reading (approximately 15px equivalent) while remaining dense enough for data-heavy interfaces. Headings are moderately larger than body text—enough to establish hierarchy without consuming excessive vertical space. Weight (medium, semibold, bold) and color (foreground vs. foreground-muted) carry much of the hierarchical load.",
+      "roles": [
+        {
+          "name": "headline",
+          "usage": "Page titles, modal titles, major section headers.",
+          "tone": "Clear and authoritative. Brief—ideally under five words."
+        },
+        {
+          "name": "title",
+          "usage": "Card headers, panel titles, significant subsection labels.",
+          "tone": "Informative, concise. Summarizes the content below."
+        },
+        {
+          "name": "subtitle",
+          "usage": "Supporting text beneath headlines or titles, section descriptions.",
+          "tone": "Clarifying, secondary. Adds context without competing for attention."
+        },
+        {
+          "name": "body",
+          "usage": "Primary readable content—paragraphs, table cells, form labels, list items.",
+          "tone": "Neutral and legible. Optimized for extended reading and scanning."
+        },
+        {
+          "name": "body-small",
+          "usage": "Secondary content, metadata, timestamps, help text, captions.",
+          "tone": "Subdued, supporting. Should not draw primary attention."
+        },
+        {
+          "name": "label",
+          "usage": "Form input labels, badge text, tab labels, button text.",
+          "tone": "Functional and direct. Clear at a glance."
+        },
+        {
+          "name": "code",
+          "usage": "Inline code, code blocks, data that benefits from fixed-width alignment (IDs, hashes, timestamps).",
+          "tone": "Technical, precise. Monospace conveys exactness."
+        }
+      ]
+    },
+    "spacing": {
+      "philosophy": "Spacing is the primary tool for grouping and separating content. Tighter spacing binds related elements; wider spacing signals boundaries between groups. A consistent base unit ensures mathematical harmony while allowing intentional variation for hierarchy.",
+      "baseUnit": "4-unit grid (conceptual base)",
+      "guidelines": [
+        "Use smaller multiples of the base unit within components (between icon and label, between stacked inputs).",
+        "Use larger multiples between components and sections.",
+        "Internal component padding should feel snug but not cramped—enough to prevent touch target overlap.",
+        "Related items (e.g., form field and its label) should have minimal separation.",
+        "Unrelated groups (e.g., two different card sections) should have visible breathing room.",
+        "Avoid mixing spacing values arbitrarily—stick to defined scale steps for consistency."
+      ]
+    },
+    "radius": {
+      "philosophy": "Border radius softens edges and signals interactivity without introducing excessive roundness. The system favors subtle, consistent radii that feel modern but not playful. Sharp corners may be used for full-bleed elements or deliberate contrast.",
+      "scaleDescription": "Controls (buttons, inputs, badges) use a smaller radius for a tight, functional feel. Containers (cards, modals, popovers) use a slightly larger radius to distinguish them as elevated surfaces. Full-round (pill) shapes are reserved for specific components like tags or toggle handles.",
+      "roles": [
+        {
+          "name": "none",
+          "usage": "Full-bleed containers, table cells, elements that should feel sharp and aligned.",
+          "relativeSize": "Zero radius—sharp corners."
+        },
+        {
+          "name": "control",
+          "usage": "Buttons, inputs, selects, small interactive elements.",
+          "relativeSize": "Small—subtle softening without appearing rounded."
+        },
+        {
+          "name": "surface",
+          "usage": "Cards, modals, dropdown menus, popovers, panels.",
+          "relativeSize": "Medium—noticeably softer than controls but still restrained."
+        },
+        {
+          "name": "full",
+          "usage": "Badges, tags, avatar images, toggle switch handles, pill buttons when intentional.",
+          "relativeSize": "Fully rounded to the element's height—creates pill or circle shapes."
+        }
+      ]
+    },
+    "iconography": {
+      "philosophy": "Icons supplement text—they do not replace it except in well-established conventions. A consistent icon style across the system reinforces visual cohesion. Icons should be simple, recognizable at small sizes, and align with the calm, utilitarian tone.",
+      "styleDescription": "Outline/stroke-based icons with consistent stroke weight. Minimal detail—icons should be legible at small sizes typical of dense interfaces. Filled variants may be used for active/selected states to add visual weight.",
+      "sizing": "Icons scale with text roles. Inline icons match the x-height or cap-height of adjacent text. Standalone icons (e.g., in icon-only buttons) meet minimum touch target sizing requirements.",
+      "guidelines": [
+        "Pair icons with text labels unless the icon's meaning is universally understood (close, search, menu).",
+        "Use consistent icon set throughout the application—do not mix icon families.",
+        "Ensure icons meet contrast requirements against their backgrounds.",
+        "Provide accessible labels (aria-label, sr-only text) for icon-only buttons."
+      ]
+    },
+    "density": {
+      "philosophy": "The default density is compact-but-breathable: tight enough to maximize information on screen, loose enough to remain scannable and touch-friendly. Density is not about cramming—it's about intentional allocation of space.",
+      "defaultMode": "compact",
+      "modes": [
+        {
+          "name": "compact",
+          "description": "The default mode. Reduced padding, smaller text for secondary content, tighter row heights. Optimized for users who work with large datasets and prefer minimal scrolling.",
+          "usage": "Standard for all dashboard and data-heavy views."
+        },
+        {
+          "name": "comfortable",
+          "description": "Increased padding and line-height for contexts requiring extended reading or less experienced users. May be offered as a user preference.",
+          "usage": "Documentation views, onboarding flows, settings pages, or as a user-selectable preference."
+        }
+      ],
+      "guidelines": [
+        "Touch targets must meet minimum sizes even in compact mode—density affects spacing, not tap area.",
+        "Tables are a primary density lever: row height, cell padding, and font size should be calibrated together.",
+        "Cards may reduce internal padding in compact mode but should retain clear content separation.",
+        "Density should not compromise legibility—minimum font sizes and contrast must be maintained."
+      ]
+    },
+    "motion": {
+      "philosophy": "Motion is functional, not decorative. It provides feedback, maintains spatial orientation during transitions, and guides attention. Animations should be quick enough to feel responsive, subtle enough to avoid distraction, and meaningful enough to justify their presence.",
+      "guidelines": [
+        "Prefer short durations—interactions should feel instant. Reserve longer durations for significant transitions (page changes, modal open/close).",
+        "Use easing curves that feel natural: ease-out for entering elements, ease-in for exiting.",
+        "Provide reduced-motion alternatives for users who prefer minimal animation (respect prefers-reduced-motion).",
+        "State changes (hover, focus, active) should transition smoothly but quickly.",
+        "Avoid motion for motion's sake—every animation should answer 'what does this help the user understand?'",
+        "Loading states may use subtle motion (spinners, skeleton pulse) to indicate activity without demanding attention."
+      ]
+    }
+  },
+  "components": {
+    "philosophy": "Components are the vocabulary of the interface. They should be composable, predictable, and self-documenting. Each component has a clear purpose; when purposes overlap, prefer the simpler component. Consistency trumps novelty—users should recognize patterns across the system.",
+    "states": {
+      "description": "Interactive components communicate their status through visual states. Consistent state styling across all components builds user intuition.",
+      "definitions": [
+        {
+          "name": "default",
+          "description": "The resting state. Visually quiet—uses muted or neutral colors. Should not attract attention.",
+          "visualCues": "Neutral background, standard border, foreground text."
+        },
+        {
+          "name": "hover",
+          "description": "Indicates the element is interactive and the cursor is over it. Provides affordance feedback.",
+          "visualCues": "Subtle background shift (slightly lighter in dark mode, slightly darker in light mode), optional subtle border change."
+        },
+        {
+          "name": "focus",
+          "description": "Indicates the element has keyboard focus. Critical for accessibility—must be clearly visible.",
+          "visualCues": "Visible focus ring using the primary accent color. Ring should be distinct from hover state."
+        },
+        {
+          "name": "active",
+          "description": "Indicates the element is being pressed or activated.",
+          "visualCues": "Slightly darker or more saturated than hover. Brief—transitions quickly to default or new state."
+        },
+        {
+          "name": "selected",
+          "description": "Indicates the element is chosen among options (e.g., selected tab, checked checkbox, selected table row).",
+          "visualCues": "Primary-muted background tint, possible accent border or indicator. Should remain visible alongside focus state."
+        },
+        {
+          "name": "disabled",
+          "description": "Indicates the element cannot be interacted with. Should clearly communicate non-interactivity.",
+          "visualCues": "Reduced opacity or muted colors. Cursor changes to not-allowed. No hover/focus effects."
+        },
+        {
+          "name": "loading",
+          "description": "Indicates an action is in progress. The element may be non-interactive during this state.",
+          "visualCues": "Spinner icon or pulsing skeleton. Disabled interactions. Maintain element dimensions to prevent layout shift."
+        },
+        {
+          "name": "error",
+          "description": "Indicates invalid input or a problem with the element's current value.",
+          "visualCues": "Destructive color for border or background tint. Paired with error message text. Icon optional but helpful."
+        }
+      ]
+    },
+    "families": [
+      {
+        "id": "inputs",
+        "name": "Input Controls",
+        "description": "Components that accept user input: text fields, selects, checkboxes, radio buttons, toggles, sliders, date pickers.",
+        "designIntent": [
+          "Optimized for quick data entry and clear feedback.",
+          "Touch-friendly sizing: inputs must meet minimum touch target dimensions.",
+          "Labels are always visible—avoid placeholder-only labels.",
+          "Error states are explicit and actionable.",
+          "Consistent height across input types for alignment in forms."
+        ]
+      },
+      {
+        "id": "buttons",
+        "name": "Buttons & Actions",
+        "description": "Components that trigger actions: buttons, icon buttons, split buttons, button groups, floating action buttons.",
+        "designIntent": [
+          "Primary actions use the accent color; secondary actions are neutral.",
+          "Destructive actions are clearly marked with destructive color.",
+          "Touch targets meet minimum sizing; padding is generous.",
+          "Buttons should look clickable—clear affordance through color, shape, or elevation.",
+          "Icon-only buttons require accessible labels.",
+          "Loading states replace content with spinner, preserving button dimensions."
+        ]
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "description": "Components that move users through the application: sidebar, navbar, tabs, breadcrumbs, pagination, steppers.",
+        "designIntent": [
+          "Current location is always clearly indicated.",
+          "Sidebar supports collapse/expand for space efficiency.",
+          "Navigation items are keyboard-navigable with clear focus states.",
+          "Avoid deep nesting—prefer flat hierarchies with search.",
+          "Mobile navigation adapts gracefully: collapsible sidebar or bottom navigation."
+        ]
+      },
+      {
+        "id": "layout",
+        "name": "Layout & Containers",
+        "description": "Structural components: cards, panels, modals, drawers, popovers, dividers, grids.",
+        "designIntent": [
+          "Cards are the primary container for grouped content—summary metrics, data sections, form groups.",
+          "Modals interrupt flow and require user response; use sparingly.",
+          "Drawers (slide-in panels) are suitable for secondary content or detail views without full navigation.",
+          "Containers use consistent padding and border radius.",
+          "Grid systems align content predictably; prefer consistent column structures."
+        ]
+      },
+      {
+        "id": "data-display",
+        "name": "Data Display",
+        "description": "Components that present information: tables, lists, data grids, stats/metrics, badges, tags, avatars, tooltips.",
+        "designIntent": [
+          "Tables are dense and scannable: consistent row heights, aligned columns, minimal cell padding.",
+          "Support sorting, filtering, and column configuration for data-heavy tables.",
+          "Stat cards summarize key metrics—pair numbers with labels and trend indicators.",
+          "Badges and tags use color meaningfully (semantic colors or accent for categorization).",
+          "Tooltips provide supplementary information without cluttering the interface."
+        ]
+      },
+      {
+        "id": "feedback",
+        "name": "Feedback & Status",
+        "description": "Components that communicate system status: toasts, alerts, banners, progress bars, spinners, skeletons, empty states.",
+        "designIntent": [
+          "Toasts for ephemeral, non-blocking messages; auto-dismiss but allow manual dismissal.",
+          "Alerts for persistent, in-context messages that require acknowledgment.",
+          "Banners for page-level or app-level announcements.",
+          "Progress indicators are honest—use determinate bars when possible, indeterminate spinners when not.",
+          "Skeleton loaders maintain layout stability during loading.",
+          "Empty states guide users toward action rather than simply stating absence.",
+          "Scrollable containers with hidden overflow use fade gradients at the overflow edge to signal additional content—never cut off content mid-line or mid-word."
+        ]
+      },
+      {
+        "id": "overlays",
+        "name": "Overlays & Dialogs",
+        "description": "Components that appear above the main content: modals, dialogs, popovers, dropdown menus, command palettes.",
+        "designIntent": [
+          "Overlays trap focus and prevent interaction with underlying content.",
+          "Backdrop provides visual separation and can be clicked to dismiss (except for blocking dialogs).",
+          "Position popovers and dropdowns near their triggers; avoid obscuring related content.",
+          "Support keyboard navigation: Escape to close, Tab to move through focusable elements.",
+          "Command palettes offer keyboard-driven search and action execution."
+        ]
+      },
+      {
+        "id": "charts",
+        "name": "Data Visualization",
+        "description": "Components that visualize data: line charts, bar charts, area charts, pie/donut charts, sparklines.",
+        "designIntent": [
+          "Charts supplement tables—they do not replace them for precise data.",
+          "Use sparingly; avoid chart-heavy dashboards that distract from actionable data.",
+          "Consistent color usage: accent color for primary series, semantic colors only when conveying meaning.",
+          "Support light and dark mode with appropriate contrast.",
+          "Provide accessible alternatives: data tables or text summaries for screen readers.",
+          "Sparklines are ideal for inline trend indication in dense layouts."
+        ]
+      }
+    ]
+  },
+  "patterns": [
+    {
+      "id": "dashboard",
+      "name": "Dashboard",
+      "useWhen": "Presenting an overview of key metrics, status, and recent activity for a domain or application.",
+      "layoutGuidelines": [
+        "Summary cards at the top: 3-5 key metrics in a horizontal row or responsive grid.",
+        "Primary data table or list below summary cards—this is the main content.",
+        "Charts are secondary; position alongside or below tables, not as the focal point.",
+        "Sidebar navigation on the left; main content fills remaining width.",
+        "Header contains page title, global search, and user menu.",
+        "Actions (create, export) positioned in the header or above the primary data area."
+      ]
+    },
+    {
+      "id": "data-table-page",
+      "name": "Data Table Page",
+      "useWhen": "Browsing, searching, filtering, and acting on a collection of records.",
+      "layoutGuidelines": [
+        "Filters and search above the table, inline or in a collapsible filter bar.",
+        "Table is the primary content; maximize vertical space for rows.",
+        "Support sortable columns, resizable columns where appropriate.",
+        "Bulk actions appear when rows are selected (e.g., floating bar or header row actions).",
+        "Pagination or infinite scroll at the bottom; show total count.",
+        "Row actions (edit, delete, view) accessible via row-level menu or inline icons.",
+        "Clicking a row may navigate to detail view or open a side drawer."
+      ]
+    },
+    {
+      "id": "detail-page",
+      "name": "Detail Page",
+      "useWhen": "Viewing and editing a single record or entity in depth.",
+      "layoutGuidelines": [
+        "Header with entity name/title, status badge, and primary actions (edit, delete).",
+        "Content organized into sections or tabs for complex entities.",
+        "Metadata (created date, ID, owner) in a secondary position—sidebar or footer.",
+        "Related data (child records, activity log) in tabs or accordion sections below primary content.",
+        "Edit mode may be inline or via modal/drawer depending on complexity."
+      ]
+    },
+    {
+      "id": "form-page",
+      "name": "Form Page",
+      "useWhen": "Collecting user input for creating or editing records, settings, or configurations.",
+      "layoutGuidelines": [
+        "Single-column layout for most forms; two-column only for very wide viewports and clearly grouped fields.",
+        "Group related fields under section headings.",
+        "Labels above inputs; avoid side-by-side label/input layout in compact density.",
+        "Primary submit action fixed at bottom or in a sticky footer for long forms.",
+        "Show validation errors inline below each field; summary error banner at top for form-level errors.",
+        "Cancel and secondary actions positioned consistently—left of primary action or in header."
+      ]
+    },
+    {
+      "id": "settings-page",
+      "name": "Settings Page",
+      "useWhen": "Configuring application or user preferences.",
+      "layoutGuidelines": [
+        "Left sidebar or vertical tabs for settings categories.",
+        "Main area shows settings for the selected category.",
+        "Use toggle switches for boolean settings, selects for enumerated options.",
+        "Save behavior: auto-save where possible with confirmation toast, or explicit save button if changes require confirmation.",
+        "Destructive settings (delete account, reset data) separated and styled with caution."
+      ]
+    },
+    {
+      "id": "empty-state",
+      "name": "Empty State",
+      "useWhen": "No data exists to display, or a search/filter returns no results.",
+      "layoutGuidelines": [
+        "Centered content: icon or illustration, heading, brief description.",
+        "Primary action clearly presented (e.g., 'Create your first item').",
+        "Avoid blame—frame as opportunity, not error.",
+        "If caused by filters, suggest clearing filters or adjusting search terms.",
+        "Keep visuals simple—avoid elaborate illustrations that distract."
+      ]
+    },
+    {
+      "id": "error-page",
+      "name": "Error Page",
+      "useWhen": "A page-level error occurs (404, 500, permission denied).",
+      "layoutGuidelines": [
+        "Centered content: error code/title, brief explanation, suggested actions.",
+        "Provide navigation options: go home, go back, contact support.",
+        "Avoid technical jargon in user-facing error messages.",
+        "Log detailed errors server-side; show user-friendly summaries client-side."
+      ]
+    },
+    {
+      "id": "sidebar-navigation",
+      "name": "Sidebar Navigation",
+      "useWhen": "The application has multiple sections or modules requiring persistent navigation.",
+      "layoutGuidelines": [
+        "Fixed-position sidebar on the left edge.",
+        "Support for toggleable collapse: full-width with labels, collapsed to icon-only.",
+        "Persist collapse state in user preferences.",
+        "Group navigation items logically; use section headers sparingly.",
+        "Include search or command palette trigger if navigation is extensive.",
+        "Current item is visually distinct (accent background or left border indicator).",
+        "On narrow viewports, sidebar becomes an overlay drawer triggered by menu button.",
+        "Scrollable if navigation exceeds viewport height; keep key items (home, search) visible."
+      ]
+    }
+  ],
+  "accessibility": {
+    "philosophy": "Accessibility is a core quality attribute, not an optional enhancement. The design system assumes users navigate with keyboard, use screen readers, have visual impairments, or prefer reduced motion. Every component and pattern must be usable without a mouse and perceivable without relying solely on color.",
+    "keyboard": [
+      "All interactive elements must be focusable and operable via keyboard.",
+      "Tab order follows visual order; avoid tabindex hacks that create unexpected sequences.",
+      "Focus is visible at all times—never suppress the default focus ring without providing a styled replacement.",
+      "Escape closes overlays, modals, and dropdowns.",
+      "Arrow keys navigate within composite widgets (menus, tabs, listboxes).",
+      "Enter or Space activates buttons and toggles.",
+      "Skip links allow bypassing repetitive navigation."
+    ],
+    "screenReader": [
+      "Use semantic HTML elements: buttons for actions, links for navigation, headings for structure.",
+      "All images have appropriate alt text; decorative images use empty alt.",
+      "Form inputs have associated labels—never rely on placeholder alone.",
+      "ARIA attributes are used correctly and sparingly: prefer native semantics over ARIA when possible.",
+      "Live regions (aria-live) announce dynamic content changes (toasts, status updates).",
+      "Modal dialogs trap focus and have appropriate role and aria-modal attributes.",
+      "Data tables use proper thead, th, and scope attributes for row/column headers."
+    ],
+    "visual": [
+      "Color contrast meets WCAG AA (4.5:1 for normal text, 3:1 for large text and UI components).",
+      "Color is never the sole indicator of meaning—pair with icons, labels, or patterns.",
+      "Text is resizable up to 200% without loss of content or functionality.",
+      "Touch targets are at least 44x44 CSS pixels.",
+      "Focus indicators have sufficient contrast against all backgrounds.",
+      "Support for prefers-color-scheme and prefers-reduced-motion media queries."
+    ]
+  },
+  "content": {
+    "toneGuidelines": [
+      "Be direct: get to the point without unnecessary preamble.",
+      "Be helpful: guide users toward success, especially in error states.",
+      "Be human: use plain language, avoid jargon, address the user as 'you'.",
+      "Be concise: every word should earn its place—cut filler.",
+      "Be consistent: use the same terms for the same concepts throughout.",
+      "Be honest: don't obscure problems or overpromise capabilities."
+    ],
+    "labelConventions": [
+      "Buttons: use verbs (Save, Create, Delete) not nouns or vague labels (Submit, OK).",
+      "Navigation: use nouns or noun phrases (Dashboard, Settings, User Profile).",
+      "Form labels: be specific (Email Address, not just Email; First Name, not Name).",
+      "Error messages: state what went wrong and how to fix it.",
+      "Empty states: focus on the opportunity, not the absence."
+    ],
+    "microcopyExamples": [
+      {
+        "context": "Primary action button to save changes",
+        "example": "Save Changes"
+      },
+      {
+        "context": "Destructive action button to delete an item",
+        "example": "Delete Item"
+      },
+      {
+        "context": "Confirmation dialog for destructive action",
+        "example": "This will permanently delete the item. This action cannot be undone."
+      },
+      {
+        "context": "Form validation error for required field",
+        "example": "This field is required."
+      },
+      {
+        "context": "Form validation error for invalid email",
+        "example": "Enter a valid email address."
+      },
+      {
+        "context": "Toast notification for successful save",
+        "example": "Changes saved."
+      },
+      {
+        "context": "Toast notification for error during save",
+        "example": "Couldn't save changes. Please try again."
+      },
+      {
+        "context": "Empty state for table with no records",
+        "example": "No items yet. Create your first one to get started."
+      },
+      {
+        "context": "Empty state for search with no results",
+        "example": "No results found. Try adjusting your search or filters."
+      },
+      {
+        "context": "Loading state placeholder",
+        "example": "Loading..."
+      },
+      {
+        "context": "Tooltip for icon-only button (edit)",
+        "example": "Edit"
+      },
+      {
+        "context": "Confirmation before discarding unsaved changes",
+        "example": "You have unsaved changes. Discard them?"
+      }
+    ]
+  },
+  "implementationNotes": {
+    "techStack": "React + TypeScript + Vite + Tailwind CSS + shadcn/ui",
+    "tokensFile": "tokens.json",
+    "themeIntegration": "Tailwind theme configuration should be derived from tokens.json, mapping design-system.json roles to Tailwind color/spacing/radius utilities.",
+    "mappingNotes": [
+      "Color roles in this document (background, surface, primary, etc.) map to CSS custom properties and Tailwind theme extensions.",
+      "Typography roles map to Tailwind font-size, font-weight, and line-height utilities.",
+      "Spacing and radius use the conceptual scales described here; tokens.json provides the numeric values.",
+      "Component families correspond to directories in the component library (e.g., src/components/ui/inputs, src/components/ui/navigation).",
+      "This design-language file is the source of truth for intent; tokens.json is the source of truth for values."
+    ],
+    "rulesForAI": [
+      "Before creating new components, check if an existing component or composition of components fulfills the need.",
+      "Before inventing new color roles, add them to design-system.json first and justify their purpose.",
+      "Do not use one-off hex values or arbitrary Tailwind classes; all colors should reference defined roles.",
+      "Respect density guidelines: default to compact mode unless the context requires comfortable density.",
+      "All interactive components must include keyboard support and appropriate ARIA attributes.",
+      "When in doubt about visual decisions, refer to the principles in this document—content-first, quiet-until-needed, predictable-structure.",
+      "Do not mix multiple accent hues; defer to the application's defined primary color.",
+      "Test generated components in both dark and light modes.",
+      "Follow existing patterns (dashboard, data-table-page, form-page) before inventing new layouts.",
+      "Microcopy should match the tone guidelines—direct, helpful, concise, human."
+    ]
+  }
+}
+
