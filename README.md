@@ -2,6 +2,12 @@
 
 A React-based design system playground showcasing [shadcn/ui](https://ui.shadcn.com/) components built on [Radix UI](https://www.radix-ui.com/) primitives with [Tailwind CSS](https://tailwindcss.com/).
 
+## Design Language
+
+**All signal, no noise.** This design system prioritizes content over chrome. Interfaces are dense but breathable—tight enough to maximize information on screen, loose enough to remain scannable and touch-friendly. The visual language is calm and utilitarian: neutral backgrounds recede so data can lead, while a single accent color appears sparingly to guide attention toward actions and status. Dark mode is the canonical experience.
+
+Every element must earn its place. Color conveys meaning, not decoration. Motion provides feedback, not flourish. Layouts are predictable so users build spatial memory. Accessibility is foundational—keyboard navigation, screen reader support, and sufficient contrast are non-negotiable defaults, not afterthoughts. The system serves internal tools, dashboards, and data-driven applications where efficiency and clarity matter more than delight.
+
 ## Tech Stack
 
 - **React** 19 with TypeScript

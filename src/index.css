@@ -3,34 +3,81 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* =============================================================================
+   THEME CONFIGURATION
+   
+   This theme implements the design language defined in design-system.json.
+   See tokens.json for the mapping between conceptual roles and CSS variables.
+   ============================================================================= */
+
 @theme inline {
+  /* ---------------------------------------------------------------------------
+     RADIUS TOKENS
+     Mapped from design-system.json foundations.radius roles:
+     - none: Sharp edges (tables, full-bleed elements)
+     - control: Buttons, inputs, small interactive elements
+     - surface: Cards, modals, panels
+     - full: Pills, avatars, badges
+     --------------------------------------------------------------------------- */
+  --radius-none: 0px;
+  --radius-control: calc(var(--radius) - 2px);
+  --radius-surface: var(--radius);
+  --radius-full: 9999px;
+  
+  /* Legacy radius scale for backwards compatibility */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* ---------------------------------------------------------------------------
+     COLOR TOKENS
+     Mapped from design-system.json foundations.color roles
+     --------------------------------------------------------------------------- */
+  
+  /* Core surfaces */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  
+  /* Primary accent - single accent color per design-system.json principle */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-muted: var(--primary-muted);
+  --color-primary-muted-foreground: var(--primary-muted-foreground);
+  
+  /* Secondary/Accent - neutral quiet colors */
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  
+  /* Semantic colors */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  /* Utility colors */
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  
+  /* Chart colors */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  
+  /* Sidebar colors */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -39,33 +86,96 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ---------------------------------------------------------------------------
+     TYPOGRAPHY TOKENS
+     Mapped from design-system.json foundations.typography roles
+     --------------------------------------------------------------------------- */
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
+/* =============================================================================
+   LIGHT MODE (default CSS values)
+   ============================================================================= */
+
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  /* Base radius for calculations */
+  --radius: 0.5rem;
+
+  /* ---------------------------------------------------------------------------
+     Core Surfaces
+     --------------------------------------------------------------------------- */
+  --background: oklch(0.985 0 0);
   --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
+  
+  /* Surface - elevated containers (cards, modals, panels) */
+  --surface: oklch(1 0 0);
+  --surface-foreground: oklch(0.141 0.005 285.823);
+  
+  /* Popover - overlays */
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
+  
+  /* Muted - subdued backgrounds */
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.552 0.016 285.938);
+
+  /* ---------------------------------------------------------------------------
+     Primary Accent
+     Per design-system.json: single accent used sparingly for actions/status
+     --------------------------------------------------------------------------- */
+  --primary: oklch(0.21 0.006 285.885);
+  --primary-foreground: oklch(0.985 0 0);
+  
+  /* Primary muted - tinted accent for selected states, hover backgrounds */
+  --primary-muted: oklch(0.93 0.01 285.885);
+  --primary-muted-foreground: oklch(0.21 0.006 285.885);
+
+  /* ---------------------------------------------------------------------------
+     Secondary/Accent - neutral quiet colors
+     --------------------------------------------------------------------------- */
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
   --accent: oklch(0.967 0.001 286.375);
   --accent-foreground: oklch(0.21 0.006 285.885);
+
+  /* ---------------------------------------------------------------------------
+     Semantic Colors
+     Per design-system.json: reserved strictly for conveying meaning
+     --------------------------------------------------------------------------- */
+  
+  /* Success - positive status, completion, healthy state */
+  --success: oklch(0.52 0.14 145);
+  --success-foreground: oklch(0.985 0 0);
+  
+  /* Warning - caution, attention needed, at-risk */
+  --warning: oklch(0.75 0.15 85);
+  --warning-foreground: oklch(0.21 0.006 285.885);
+  
+  /* Destructive - danger, errors, irreversible actions */
   --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  /* ---------------------------------------------------------------------------
+     Utility Colors
+     --------------------------------------------------------------------------- */
   --border: oklch(0.92 0.004 286.32);
   --input: oklch(0.92 0.004 286.32);
   --ring: oklch(0.705 0.015 286.067);
+
+  /* ---------------------------------------------------------------------------
+     Chart Colors
+     --------------------------------------------------------------------------- */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+
+  /* ---------------------------------------------------------------------------
+     Sidebar Colors
+     --------------------------------------------------------------------------- */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.141 0.005 285.823);
   --sidebar-primary: oklch(0.21 0.006 285.885);
@@ -74,41 +184,139 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+
+  /* ---------------------------------------------------------------------------
+     Typography Scale
+     Per design-system.json: tight modular scale, hierarchy via weight/color
+     Sizes optimized for readability while maintaining compact density
+     --------------------------------------------------------------------------- */
+  --text-headline-size: 1.75rem;
+  --text-headline-leading: 1.2;
+  --text-headline-weight: 600;
+  --text-headline-tracking: -0.025em;
+
+  --text-title-size: 1.25rem;
+  --text-title-leading: 1.3;
+  --text-title-weight: 600;
+  --text-title-tracking: -0.015em;
+
+  --text-subtitle-size: 1rem;
+  --text-subtitle-leading: 1.4;
+  --text-subtitle-weight: 400;
+  --text-subtitle-tracking: 0;
+
+  --text-body-size: 0.9375rem;
+  --text-body-leading: 1.5;
+  --text-body-weight: 400;
+  --text-body-tracking: 0;
+
+  --text-body-small-size: 0.875rem;
+  --text-body-small-leading: 1.5;
+  --text-body-small-weight: 400;
+  --text-body-small-tracking: 0;
+
+  --text-label-size: 0.875rem;
+  --text-label-leading: 1.2;
+  --text-label-weight: 500;
+  --text-label-tracking: 0;
+
+  --text-code-size: 0.875rem;
+  --text-code-leading: 1.4;
+  --text-code-weight: 400;
+  --text-code-tracking: 0;
 }
 
+/* =============================================================================
+   DARK MODE
+   Per design-system.json: dark is the canonical/default experience
+   ============================================================================= */
+
 .dark {
-  --background: oklch(0.141 0.005 285.823);
+  /* ---------------------------------------------------------------------------
+     Core Surfaces
+     --------------------------------------------------------------------------- */
+  --background: oklch(0.13 0.004 285.823);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
+  
+  /* Surface - slightly elevated from background */
+  --surface: oklch(0.18 0.005 285.885);
+  --surface-foreground: oklch(0.985 0 0);
+  
+  /* Popover */
+  --popover: oklch(0.18 0.005 285.885);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.92 0.004 286.32);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
+  
+  /* Muted */
+  --muted: oklch(0.22 0.005 286.033);
+  --muted-foreground: oklch(0.65 0.012 286.067);
+
+  /* ---------------------------------------------------------------------------
+     Primary Accent
+     --------------------------------------------------------------------------- */
+  --primary: oklch(0.7 0.12 250);
+  --primary-foreground: oklch(0.13 0.004 285.823);
+  
+  /* Primary muted - subtle tinted background for selections */
+  --primary-muted: oklch(0.25 0.04 250);
+  --primary-muted-foreground: oklch(0.85 0.06 250);
+
+  /* ---------------------------------------------------------------------------
+     Secondary/Accent - neutral quiet colors
+     --------------------------------------------------------------------------- */
+  --secondary: oklch(0.22 0.005 286.033);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
+  --accent: oklch(0.22 0.005 286.033);
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+
+  /* ---------------------------------------------------------------------------
+     Semantic Colors
+     Adjusted for dark mode contrast
+     --------------------------------------------------------------------------- */
+  
+  /* Success */
+  --success: oklch(0.65 0.17 145);
+  --success-foreground: oklch(0.13 0.004 285.823);
+  
+  /* Warning */
+  --warning: oklch(0.8 0.14 85);
+  --warning-foreground: oklch(0.13 0.004 285.823);
+  
+  /* Destructive */
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  /* ---------------------------------------------------------------------------
+     Utility Colors
+     --------------------------------------------------------------------------- */
+  --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
+  --ring: oklch(0.6 0.1 250);
+
+  /* ---------------------------------------------------------------------------
+     Chart Colors (dark mode optimized)
+     --------------------------------------------------------------------------- */
+  --chart-1: oklch(0.65 0.2 250);
+  --chart-2: oklch(0.7 0.15 165);
+  --chart-3: oklch(0.75 0.16 75);
+  --chart-4: oklch(0.6 0.22 300);
+  --chart-5: oklch(0.65 0.22 20);
+
+  /* ---------------------------------------------------------------------------
+     Sidebar Colors
+     --------------------------------------------------------------------------- */
+  --sidebar: oklch(0.16 0.004 285.885);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary: oklch(0.7 0.12 250);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
+  --sidebar-accent: oklch(0.22 0.005 286.033);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
+  --sidebar-ring: oklch(0.6 0.1 250);
 }
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
 
 @layer base {
   * {
@@ -117,4 +325,59 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* =============================================================================
+   TYPOGRAPHY UTILITIES
+   Per design-system.json foundations.typography roles
+   ============================================================================= */
+
+@utility text-headline {
+  font-size: var(--text-headline-size);
+  line-height: var(--text-headline-leading);
+  font-weight: var(--text-headline-weight);
+  letter-spacing: var(--text-headline-tracking);
+}
+
+@utility text-title {
+  font-size: var(--text-title-size);
+  line-height: var(--text-title-leading);
+  font-weight: var(--text-title-weight);
+  letter-spacing: var(--text-title-tracking);
+}
+
+@utility text-subtitle {
+  font-size: var(--text-subtitle-size);
+  line-height: var(--text-subtitle-leading);
+  font-weight: var(--text-subtitle-weight);
+  letter-spacing: var(--text-subtitle-tracking);
+}
+
+@utility text-body {
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  font-weight: var(--text-body-weight);
+  letter-spacing: var(--text-body-tracking);
+}
+
+@utility text-body-small {
+  font-size: var(--text-body-small-size);
+  line-height: var(--text-body-small-leading);
+  font-weight: var(--text-body-small-weight);
+  letter-spacing: var(--text-body-small-tracking);
+}
+
+@utility text-label {
+  font-size: var(--text-label-size);
+  line-height: var(--text-label-leading);
+  font-weight: var(--text-label-weight);
+  letter-spacing: var(--text-label-tracking);
+}
+
+@utility text-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-code-size);
+  line-height: var(--text-code-leading);
+  font-weight: var(--text-code-weight);
+  letter-spacing: var(--text-code-tracking);
 }
