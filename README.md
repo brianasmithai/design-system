@@ -192,6 +192,16 @@ pnpm build:lib
 pnpm lint
 ```
 
+## Release & Publish Pipeline
+
+1. Push a semver tag (e.g., `git tag v1.2.3 && git push origin v1.2.3`). The tag must match the `v*` pattern to trigger `Create Release`.
+2. The `Create Release` workflow builds release notes via `softprops/action-gh-release`.
+3. After that workflow finishes successfully, the `Publish to npm` workflow runs via `workflow_run`, checks out the exact released commit (`github.event.workflow_run.head_sha`), and publishes to npm using Trusted Publisher provenance.
+
+### Dry-run verification
+
+For a rehearsal, push a disposable tag such as `v1.2.3-rc.0` to the repository. Confirm both workflows complete, then delete the test release and tag (`git push origin :refs/tags/v1.2.3-rc.0`) to avoid polluting the release history.
+
 ### Project Structure
 
 ```
