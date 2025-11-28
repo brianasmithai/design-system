@@ -1,0 +1,23 @@
+# Source files (we ship dist/)
+src/App.tsx
+src/App.css
+src/main.tsx
+src/vite-env.d.ts
+
+# Config files
+*.config.ts
+*.config.js
+tsconfig*.json
+eslint.config.js
+.gitignore
+
+# Dev files
+.git/
+node_modules/
+design-inspiration/
+*.plan.md
+
+# Build artifacts from dev
+index.html
+public/
+
