@@ -39,7 +39,7 @@ jobs:
         env:
           TARGET_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
-          if ! PKG_VERSION=$(node --input-type=module -p "import { readFileSync } from 'node:fs'; JSON.parse(readFileSync('package.json','utf8')).version"); then
+          if ! PKG_VERSION=$(node -e "console.log(require('./package.json').version)"); then
             echo "Failed to execute node to read package version"
             exit 1
           fi
