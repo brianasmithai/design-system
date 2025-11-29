@@ -7,6 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
   globalIgnores(['dist']),
+  // Base config for all TS/TSX files
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -20,4 +21,12 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  // Library UI components: allow exporting helpers alongside components
+  {
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
+
