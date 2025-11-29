@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
       
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
@@ -33,9 +34,39 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
+      
+      - name: Verify tag matches package version
+        env:
+          TARGET_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if ! PKG_VERSION=$(node --input-type=module -p "import { readFileSync } from 'node:fs'; JSON.parse(readFileSync('package.json','utf8')).version"); then
+            echo "Failed to execute node to read package version"
+            exit 1
+          fi
+          if [ -z "${PKG_VERSION}" ]; then
+            echo "Unable to read version from package.json"
+            exit 1
+          fi
+          EXPECTED_TAG="v${PKG_VERSION}"
+
+          TAGS=$(git tag --points-at "${TARGET_SHA}")
+          if [ -z "${TAGS}" ]; then
+            echo "No tags found pointing at commit ${TARGET_SHA}"
+            exit 1
+          fi
+
+          if ! echo "${TAGS}" | grep -Fxq "${EXPECTED_TAG}"; then
+            echo "Expected tag ${EXPECTED_TAG} not found among:"
+            echo "${TAGS}"
+            exit 1
+          fi
+          echo "Publishing ${EXPECTED_TAG} for version ${PKG_VERSION}"
           
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+      
+      - name: Lint
+        run: pnpm lint
       
       - name: Build library
         run: pnpm build:lib
