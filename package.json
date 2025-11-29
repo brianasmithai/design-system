@@ -23,7 +23,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "sideEffects": [
     "*.css"
@@ -31,7 +32,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "tsup && cp src/index.css dist/styles.css",
+    "build:lib": "tsup && node --input-type=module -e \"import { copyFileSync } from 'node:fs'; copyFileSync('src/index.css','dist/styles.css');\"",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepublishOnly": "pnpm build:lib"
