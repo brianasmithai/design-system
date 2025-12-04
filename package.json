@@ -1,6 +1,6 @@
 {
   "name": "@brianasmithai/design-system",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A calm, dense, utility-focused design system built on React, Tailwind CSS, and Radix UI primitives",
   "author": "brianasmithai",
   "license": "MIT",
